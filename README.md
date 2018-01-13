@@ -38,11 +38,11 @@ If you're feeling ambitious (again, totally optional though), don't stop there! 
 
 [image1]: ./output_images/undistort_output.png "Undistorted"
 [image2]: ./output_images/test1.png "Road Transformed"
-[image3]: ./output_images/binary_combo_example.png  "Binary Example"
+[image3]: ./output_images/binary_combo.png  "Binary Example"
 [image4]: ./output_images/warped_straight_lines.png "Warp Example"
 [image5]: ./output_images/color_fit_lines.png "Fit Visual"
 [image6]: ./output_images/example_output.png  "Output"
-[video1]: ./output_images/project_video.mp4 "Video"
+[video1]: ./project_video_result.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
 
@@ -59,7 +59,7 @@ You're reading it!
 
 #### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
-The code for this step is contained in the first code cell of the IPython notebook located in "./examples/example.ipynb" (or in lines # through # of the file called `some_file.py`).  
+The code for this step is contained in the first code cell of the IPython notebook located in "example_Copy1.ipynb" (or in lines # through # of the file called `part 2`).  
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
