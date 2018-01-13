@@ -42,7 +42,7 @@ If you're feeling ambitious (again, totally optional though), don't stop there! 
 [image4]: ./output_images/warped_straight_lines.png "Warp Example"
 [image5]: ./output_images/color_fit_lines.png "Fit Visual"
 [image6]: ./output_images/example_output.png  "Output"
-[video1]: ./output_images/project_video.mp4 "Video"
+[video1]: ./project_video_result.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
 
