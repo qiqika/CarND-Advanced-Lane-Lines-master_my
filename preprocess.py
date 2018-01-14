@@ -145,8 +145,8 @@ def extract_image(image, ksize):
    #kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(3,3))  
     #opend = cv2.morphologyEx(combined, cv2.MORPH_OPEN, kernel)
     opend= combined
-    fig6  = plt.figure(); ax6 = fig6.add_subplot(1,1,1)
-    ax6.imshow(opend, cmap='gray')
+    #fig6  = plt.figure(); ax6 = fig6.add_subplot(1,1,1)
+    #ax6.imshow(opend, cmap='gray')
     return opend
 
 def perspective_image(image):
@@ -156,7 +156,7 @@ def perspective_image(image):
     # For source points I'm grabbing the outer four detected corners
     point1 = [int(190/960*imshape[1]),imshape[0]]
     point2 = [int(450/960*imshape[1]), int(340/540*imshape[0])]
-    point3 = [int(530/960*imshape[1]),int(340/540*imshape[0])]
+    point3 = [int(550/960*imshape[1]),int(340/540*imshape[0])]
     point4 = [int(900/960*imshape[1]),imshape[0]]
     src = np.float32([point1, point2, point3, point4 ])
     #print(src)
