@@ -77,18 +77,18 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `preprocess.py` and reference blog :Naoki Shibuya.Finding Lane Lines on the Road).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `preprocess.py extract_image()` and reference blog :Naoki Shibuya.Finding Lane Lines on the Road). Combination method includes HLS color space segment, x direction sobel operator, y direction sobel operator, sobel gradient magnitude and sobel gradient direction. I find the  HLS color space segment is the key. Here's an example of my output for this step.  (note: this is not actually from one of the test images)
 
 ![alt text][image3]
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform in the file `preprocess.py perspective_image()` .  The `perspective_image()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
 ```python
     point1 = [int(190/960*imshape[1]),imshape[0]]
     point2 = [int(450/960*imshape[1]), int(340/540*imshape[0])]
-    point3 = [int(530/960*imshape[1]),int(340/540*imshape[0])]
+    point3 = [int(550/960*imshape[1]),int(340/540*imshape[0])]
     point4 = [int(900/960*imshape[1]),imshape[0]]
     src = np.float32([point1, point2, point3, point4 ])   
 
@@ -104,10 +104,10 @@ This resulted in the following source and destination points:
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
-| 333 , 670     | 333  , 720    | 
-| 586 , 466     | 333  , 0      |
-| 720 , 466     | 1066 , 0      |
-| 1066 , 670    | 1066 , 720    |
+| 253 , 720     | 253  , 720    | 
+| 600 , 453     | 253  , 0      |
+| 733 , 453     | 1200 , 0      |
+| 1200 , 720    | 1200 , 720    |
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
@@ -115,18 +115,36 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+First, set the left and right center point for finding next window. Next, when window have nonzero pixels, calculate the pixels mean centers. if dont have just follow former center point x value to reduce center point y value for sliding window.Finally, we get points for fitting and my lane lines can be fitted with a 2nd order polynomial kinda like this:
 
 ![alt text][image5]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `draw_line.py`
+I did this in lines # through # in my code in `part 8` . Lines 21 to 22 is for calculating radius of curvature, Lines 25 to 30 is for vehicle center position. The radius of curvature  at any point x of the function x=f(y) is given tutorial [here](http://www.intmath.com/applications-differentiation/8-radius-curvature.php). And the vehicle center like this:
+
+```
+lane_center = (left_x_int + right_x_int) / 2
+image_center = image.shape[1] / 2
+offset = (image_center - lane_center) * xm_per_pix
+```
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `part
-9` in the function `Lane_Finding_Pipeline()`.  Here is an example of my result on a test image:
+I implemented this step in lines # through # in my code in `part 9` in the function `Lane_Finding_Pipeline()`, all steps as follow.
+
+1.undistort image( line 9)
+
+2.perspective transform image for warpping lane line image(line 10)
+
+3.extract lane line  binary image (line 13)
+
+4.fit the lane line from nonzero binary image(line 19)
+
+5.warped image return original image (line 22 to 32)
+
+
+Here is an example of my result on a test image:
 
 ![alt text][image6]
 
