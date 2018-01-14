@@ -109,7 +109,7 @@ This resulted in the following source and destination points:
 | 733 , 453     | 1200 , 0      |
 | 1200 , 720    | 1200 , 720    |
 
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
+I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image. When creating the binary image it may prove helpful to create the birds-eye perspective first. The reason is that error pixels in the binary get stretched out when the birds-eye transformation is performed second, as follow picture show:
 
 ![alt text][image4]
 
@@ -165,4 +165,7 @@ in challenge project, using the hsl color space cannot find the line, but using 
 i tried to expand roi to make image hold the line parts, but it seems dont work 
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
-since the cnn classification ability is good , so i want to try cnn for segment line in complicated situation 
+
+1.since the cnn classification ability is good , so i want to try cnn for segment line in complicated situation.
+
+2.Once lines are found they can be used to limit/focus the area of the search in the next frames. So next work is to use the relationship of frame to constrain line region.
